@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saco TV - TV'ye Bağlan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0B1120 0%, #1F2937 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+        
+        .container {
+            background: rgba(31, 41, 55, 0.9);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            color: #E50914;
+            margin-bottom: 8px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            color: #9CA3AF;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #E5E7EB;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(75, 85, 99, 0.5);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #E50914;
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+        }
+        
+        input::placeholder {
+            color: #6B7280;
+        }
+        
+        .button {
+            width: 100%;
+            padding: 14px;
+            background: #E50914;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+        
+        .button:hover {
+            background: #B8070F;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button:disabled {
+            background: #6B7280;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .status.success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ADE80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: block;
+        }
+        
+        .status.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #F87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            display: block;
+        }
+        
+        .status.loading {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60A5FA;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: block;
+        }
+        
+        .info {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: #93C5FD;
+        }
+        
+        .info strong {
+            color: #60A5FA;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Saco TV</h1>
+        <p class="subtitle">TV'ye Bağlan</p>
+        
+        <div class="info">
+            <strong>Bilgi:</strong> Bu sayfa TV ekranındaki kod ile eşleştirilmiştir. 
+            Login bilgilerinizi girin ve TV otomatik olarak bağlanacak.
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="host">Sunucu Adresi (Host)</label>
+                <input 
+                    type="text" 
+                    id="host" 
+                    name="host" 
+                    placeholder="örn: http://example.com:8080"
+                    required
+                />
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Kullanıcı Adı</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Kullanıcı adınızı girin"
+                    required
+                />
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Şifrenizi girin"
+                    required
+                />
+            </div>
+            
+            <div class="form-group">
+                <label for="accountName">Hesap Adı (Opsiyonel)</label>
+                <input 
+                    type="text" 
+                    id="accountName" 
+                    name="accountName" 
+                    placeholder="Hesap adınızı girin"
+                />
+            </div>
+            
+            <button type="submit" class="button" id="submitBtn">
+                TV'ye Bağlan
+            </button>
+        </form>
+        
+        <div id="status" class="status"></div>
+    </div>
+    
+    <script>
+        // URL'den kod parametresini al
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        
+        if (!code) {
+            document.getElementById('status').textContent = 'Hata: Kod bulunamadı. Lütfen TV ekranındaki QR kodu okutun veya linki kullanın.';
+            document.getElementById('status').className = 'status error';
+            document.getElementById('loginForm').style.display = 'none';
+        }
+        
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const status = document.getElementById('status');
+            
+            const host = document.getElementById('host').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const accountName = document.getElementById('accountName').value.trim();
+            
+            // Validasyon
+            if (!host || !username || !password) {
+                status.textContent = 'Lütfen tüm gerekli alanları doldurun.';
+                status.className = 'status error';
+                return;
+            }
+            
+            // Host formatını kontrol et
+            if (!host.startsWith('http://') && !host.startsWith('https://')) {
+                status.textContent = 'Host adresi http:// veya https:// ile başlamalıdır.';
+                status.className = 'status error';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Bağlanıyor...';
+            status.textContent = 'TV\'ye bağlanılıyor, lütfen bekleyin...';
+            status.className = 'status loading';
+            
+            try {
+                // Supabase endpoint'ine istek gönder
+                // NOT: Bu endpoint'i Supabase Edge Function olarak oluşturmanız gerekecek
+                // Şimdilik direkt Supabase REST API kullanıyoruz
+                
+                // Supabase URL ve Key
+                const SUPABASE_URL = 'https://smxgmpvxacuhutrrqves.supabase.co';
+                const SUPABASE_KEY = 'sb_publishable_JDY9fbD-28CdSI_N4vShIw_LWb9qvgN';
+                
+                // Host'u parse et
+                const cleanHost = host.replace('http://', '').replace('https://', '').replace('/', '');
+                const hostParts = cleanHost.split(':');
+                const hostOnly = hostParts[0];
+                const port = hostParts.length > 1 ? hostParts[1] : '80';
+                
+                // Payload formatı: host_port_username_password_accountName
+                const payload = `${hostOnly}_${port}_${username}_${password}_${accountName || ''}`;
+                
+                // Önce mevcut session'ı kontrol et
+                const checkResponse = await fetch(`${SUPABASE_URL}/rest/v1/tv_login_sessions?code=eq.${code}&select=*`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                
+                const sessions = await checkResponse.json();
+                
+                if (sessions.length === 0 || sessions[0].status !== 'WAITING') {
+                    status.textContent = 'Hata: Kod geçersiz veya süresi dolmuş.';
+                    status.className = 'status error';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'TV\'ye Bağlan';
+                    return;
+                }
+                
+                // Session'ı güncelle
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/tv_login_sessions?code=eq.${code}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        payload: payload,
+                        status: 'SUCCESS'
+                    })
+                });
+                
+                if (response.ok) {
+                    status.textContent = 'Başarılı! TV\'ye bağlanılıyor...';
+                    status.className = 'status success';
+                    
+                    // 2 saniye sonra mesajı göster
+                    setTimeout(() => {
+                        status.textContent = 'TV\'ye bağlandı! Bu sayfayı kapatabilirsiniz.';
+                    }, 2000);
+                } else {
+                    const error = await response.json();
+                    status.textContent = 'Hata: ' + (error.message || 'Bağlantı başarısız oldu.');
+                    status.className = 'status error';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'TV\'ye Bağlan';
+                }
+            } catch (error) {
+                status.textContent = 'Hata: ' + error.message;
+                status.className = 'status error';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'TV\'ye Bağlan';
+            }
+        });
+    </script>
+</body>
+</html>
+
