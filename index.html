@@ -40,7 +40,7 @@
         
         .subtitle {
             color: #9CA3AF;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             font-size: 14px;
         }
         
@@ -180,6 +180,42 @@
         .info strong {
             color: #60A5FA;
         }
+
+        /* --- TABS STYLE --- */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid rgba(75, 85, 99, 0.3);
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #9CA3AF;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: #E50914;
+            border-bottom: 2px solid #E50914;
+        }
+
+        .tab:hover:not(.active) {
+            color: #E5E7EB;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -194,59 +230,76 @@
         
         <form id="loginForm">
             <div class="form-group">
-                <label for="host">Sunucu Adresi (Host)</label>
-                <input 
-                    type="text" 
-                    id="host" 
-                    name="host" 
-                    placeholder="örn: http://example.com:8080"
-                    required
-                />
-            </div>
-            
-            <div class="form-group">
-                <label for="username">Kullanıcı Adı</label>
-                <input 
-                    type="text" 
-                    id="username" 
-                    name="username" 
-                    placeholder="Kullanıcı adınızı girin"
-                    required
-                />
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Şifre</label>
-                <div class="password-wrapper">
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Şifrenizi girin"
-                        required
-                    />
-                    <button type="button" id="togglePassword" class="toggle-password" aria-label="Şifreyi Göster">
-                        <svg id="eyeIconClosed" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                            <line x1="1" y1="1" x2="23" y2="23"></line>
-                        </svg>
-                        <svg id="eyeIconOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="form-group">
                 <label for="accountName">Hesap Adı</label>
                 <input 
                     type="text" 
                     id="accountName" 
                     name="accountName" 
-                    placeholder="Hesap adınızı girin"
+                    placeholder="Hesap adınızı girin (Örn: Ev, Ofis)"
                     required
                 />
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-target="xtream">Xtream Codes</div>
+                <div class="tab" data-target="m3u">M3U Playlist</div>
+            </div>
+
+            <div id="xtream" class="tab-content active">
+                <div class="form-group">
+                    <label for="host">Sunucu Adresi (Host)</label>
+                    <input 
+                        type="text" 
+                        id="host" 
+                        name="host" 
+                        placeholder="örn: http://example.com:8080"
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Kullanıcı adınızı girin"
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Şifre</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Şifrenizi girin"
+                        />
+                        <button type="button" id="togglePassword" class="toggle-password" aria-label="Şifreyi Göster">
+                            <svg id="eyeIconClosed" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>
+                            <svg id="eyeIconOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                <path d="M1 12s4-8 11-8 11 8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="m3u" class="tab-content">
+                <div class="form-group">
+                    <label for="m3uUrl">M3U Linki</label>
+                    <input 
+                        type="url" 
+                        id="m3uUrl" 
+                        name="m3uUrl" 
+                        placeholder="örn: http://example.com/get.php?username=..."
+                    />
+                    <div id="m3uError" style="color: #F87171; font-size: 13px; margin-top: 6px; display: none;"></div>
+                </div>
             </div>
             
             <button type="submit" class="button" id="submitBtn" disabled>
@@ -263,27 +316,56 @@
         const code = urlParams.get('code');
         
         if (!code) {
-            document.getElementById('status').textContent = 'Hata: Kod bulunamadı. Lütfen TV ekranındaki QR kodu okutun veya linki kullanın.';
-            document.getElementById('status').className = 'status error';
+            const status = document.getElementById('status');
+            status.textContent = 'Hata: Kod bulunamadı. Lütfen TV ekranındaki QR kodu okutun veya linki kullanın.';
+            status.className = 'status error';
             document.getElementById('loginForm').style.display = 'none';
         }
         
-        // Tüm input alanlarını seç
+        // Elementler
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        const accountNameInput = document.getElementById('accountName');
         const hostInput = document.getElementById('host');
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
-        const accountNameInput = document.getElementById('accountName');
+        const m3uInput = document.getElementById('m3uUrl');
+        
         const submitBtn = document.getElementById('submitBtn');
         const togglePasswordBtn = document.getElementById('togglePassword');
         const eyeIconClosed = document.getElementById('eyeIconClosed');
         const eyeIconOpen = document.getElementById('eyeIconOpen');
+        const m3uError = document.getElementById('m3uError');
+
+        let activeTab = 'xtream'; // Varsayılan sekme
+
+        // --- TAB GEÇİŞLERİ ---
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Aktif class'larını güncelle
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // İçerikleri güncelle
+                const target = tab.dataset.target;
+                activeTab = target;
+                
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if(content.id === target) content.classList.add('active');
+                });
+                
+                // Form geçerliliğini tekrar kontrol et
+                checkFormValidity();
+            });
+        });
         
-        // Şifre Göster/Gizle İşlevi
+        // Şifre Göster/Gizle
         togglePasswordBtn.addEventListener('click', () => {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
             
-            // İkonları değiştir
             if (type === 'text') {
                 eyeIconClosed.style.display = 'none';
                 eyeIconOpen.style.display = 'block';
@@ -293,65 +375,117 @@
             }
         });
 
-        // Buton durumunu kontrol eden fonksiyon
+        // --- FORM VALIDASYON ---
         function checkFormValidity() {
-            const host = hostInput.value.trim();
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
             const accountName = accountNameInput.value.trim();
-            
-            // Tüm alanlar dolu mu kontrol et
-            if (host && username && password && accountName) {
-                submitBtn.disabled = false;
+            let isValid = false;
+
+            if (activeTab === 'xtream') {
+                const host = hostInput.value.trim();
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+                isValid = accountName && host && username && password;
             } else {
-                submitBtn.disabled = true;
+                const m3u = m3uInput.value.trim();
+                isValid = accountName && m3u;
+            }
+            
+            submitBtn.disabled = !isValid;
+        }
+        
+        // Input listener'ları
+        [accountNameInput, hostInput, usernameInput, passwordInput, m3uInput].forEach(input => {
+            input.addEventListener('input', checkFormValidity);
+        });
+        
+        // --- M3U PARSE FONKSİYONU ---
+        function parseM3uUrl(url) {
+            try {
+                // Basit bir URL kontrolü
+                if (!url.includes('?') || !url.includes('username=') || !url.includes('password=')) {
+                    return null;
+                }
+
+                // URL'i parçala
+                const parts = url.split('?');
+                if (parts.length < 2) return null;
+
+                const hostPart = parts[0]; // http://server.com:8080/get.php
+                const queryPart = parts[1]; // username=...&password=...
+
+                // Host'u temizle (/get.php veya / sonunu at)
+                let cleanHost = hostPart;
+                if (cleanHost.endsWith('/get.php')) {
+                    cleanHost = cleanHost.replace('/get.php', '');
+                } else if (cleanHost.endsWith('/')) {
+                    cleanHost = cleanHost.slice(0, -1);
+                }
+
+                // Query parametrelerini parse et
+                const params = new URLSearchParams(queryPart);
+                const username = params.get('username');
+                const password = params.get('password');
+
+                if (!username || !password) return null;
+
+                return {
+                    host: cleanHost,
+                    username: username,
+                    password: password
+                };
+
+            } catch (e) {
+                return null;
             }
         }
         
-        // Her input değiştiğinde kontrol et
-        hostInput.addEventListener('input', checkFormValidity);
-        usernameInput.addEventListener('input', checkFormValidity);
-        passwordInput.addEventListener('input', checkFormValidity);
-        accountNameInput.addEventListener('input', checkFormValidity);
-        
-        // Sayfa yüklendiğinde kontrol et
-        checkFormValidity();
-        
+        // --- FORM SUBMIT ---
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const status = document.getElementById('status');
-            
-            // Host değerini al ve sondaki / işaretini temizle
-            let hostRaw = hostInput.value.trim();
-            // Eğer host / ile bitiyorsa temizle (http://example.com/ -> http://example.com)
-            const host = hostRaw.replace(/\/+$/, ''); 
-
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
             const accountName = accountNameInput.value.trim();
             
-            // Validasyon
-            if (!host || !username || !password || !accountName) {
-                status.textContent = 'Lütfen tüm alanları doldurun.';
-                status.className = 'status error';
-                return;
+            let finalHost, finalUsername, finalPassword;
+
+            // Verileri hazırla
+            if (activeTab === 'xtream') {
+                let hostRaw = hostInput.value.trim();
+                finalHost = hostRaw.replace(/\/+$/, ''); // Sondaki / temizle
+                finalUsername = usernameInput.value.trim();
+                finalPassword = passwordInput.value.trim();
+                
+                // Host kontrolü
+                if (!finalHost.startsWith('http://') && !finalHost.startsWith('https://')) {
+                    status.textContent = 'Host adresi http:// veya https:// ile başlamalıdır.';
+                    status.className = 'status error';
+                    return;
+                }
+
+            } else {
+                // M3U Parse İşlemi
+                const m3uUrl = m3uInput.value.trim();
+                const parsed = parseM3uUrl(m3uUrl);
+                
+                if (!parsed) {
+                    m3uError.textContent = 'Geçersiz M3U Linki. İçinde kullanıcı adı ve şifre bulunamadı.';
+                    m3uError.style.display = 'block';
+                    return;
+                }
+                
+                m3uError.style.display = 'none';
+                finalHost = parsed.host;
+                finalUsername = parsed.username;
+                finalPassword = parsed.password;
             }
-            
-            // Host formatını kontrol et
-            if (!host.startsWith('http://') && !host.startsWith('https://')) {
-                status.textContent = 'Host adresi http:// veya https:// ile başlamalıdır.';
-                status.className = 'status error';
-                return;
-            }
-            
+
+            // Gönderim Başlıyor
             submitBtn.disabled = true;
             submitBtn.textContent = 'Bağlanıyor...';
             status.textContent = 'TV\'ye bağlanılıyor, lütfen bekleyin...';
             status.className = 'status loading';
             
             try {
-                // Supabase Edge Function'a istek gönder (key'ler server-side'da)
                 const EDGE_FUNCTION_URL = 'https://smxgmpvxacuhutrrqves.supabase.co/functions/v1/approve-tv-login';
                 
                 const response = await fetch(EDGE_FUNCTION_URL, {
@@ -361,9 +495,9 @@
                     },
                     body: JSON.stringify({
                         code: code,
-                        host: host, // Temizlenmiş host gönderiliyor
-                        username: username,
-                        password: password,
+                        host: finalHost,
+                        username: finalUsername,
+                        password: finalPassword,
                         accountName: accountName
                     })
                 });
@@ -374,7 +508,6 @@
                     status.textContent = 'Başarılı! TV\'ye bağlanılıyor...';
                     status.className = 'status success';
                     
-                    // 2 saniye sonra mesajı göster
                     setTimeout(() => {
                         status.textContent = 'TV\'ye bağlandı! Bu sayfayı kapatabilirsiniz.';
                     }, 2000);
@@ -391,6 +524,9 @@
                 submitBtn.textContent = 'TV\'ye Bağlan';
             }
         });
+        
+        // Sayfa yüklendiğinde validasyonu çalıştır
+        checkFormValidity();
     </script>
 </body>
 </html>
